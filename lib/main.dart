@@ -6,10 +6,10 @@ import 'package:my_game_tools/utils/Adapt.dart';
 import 'package:my_game_tools/weight/dialog.dart';
 import 'package:package_info/package_info.dart';
 
-var appName = "";
-var packageName = "";
-var version = "";
-var buildNumber ="";
+var appName = "我的游戏助手";
+var packageName = "null";
+var version = "1";
+var buildNumber ="1";
 
 void main(){
   runApp(MyApp());
@@ -80,8 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 background: Hero(
                   tag: "bar",
-                  child: Image.network(
-                    'https://i.loli.net/2019/10/07/SdQqMPAZa36r8Ls.jpg',
+                  child: Image.asset(
+                    'images/game01bar.jpg',
                     fit: BoxFit.cover,
                   ),
                 )),

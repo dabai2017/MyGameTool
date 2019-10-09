@@ -53,8 +53,8 @@ class _wzrytyfState extends State<wzrytyf> {
               Card(
                   child: Hero(
                 tag: "bar",
-                child: Image.network(
-                    "http://game.gtimg.cn/images/yxzj/cp/a20161115tyf/slogan.png"),
+                child: Image.asset(
+                    "images/slogan.png"),
               )),
               InkWell(
                 child: ListTile(
