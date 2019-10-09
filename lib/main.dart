@@ -43,6 +43,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           // is not restarted.
           primarySwatch: Colors.blue,
+          fontFamily:"googlesan"
+
         ),
         home: Scaffold(
           body: MyHomePage(),

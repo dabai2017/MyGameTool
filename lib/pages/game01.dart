@@ -3,6 +3,7 @@ import 'package:gbk2utf8/gbk2utf8.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:my_game_tools/pages/wzrytyf_gg.dart';
+import 'package:my_game_tools/utils/datas.dart';
 import 'package:my_game_tools/weight/dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,6 +20,7 @@ class _wzrytyfState extends State<wzrytyf> {
     // TODO: implement initState
     super.initState();
 
+    getNewsData();
     find_time();
   }
 
@@ -53,8 +55,7 @@ class _wzrytyfState extends State<wzrytyf> {
               Card(
                   child: Hero(
                 tag: "bar",
-                child: Image.asset(
-                    "images/slogan.png"),
+                child: Image.asset("images/slogan.png"),
               )),
               InkWell(
                 child: ListTile(
@@ -121,19 +122,16 @@ class _wzrytyfState extends State<wzrytyf> {
               ),
               InkWell(
                 child: ListTile(
-                  title: Text("公告新闻"),
+                  title: Text("体验服公告"),
                   leading: Icon(Icons.list),
                 ),
                 onTap: () {
-                 /*
                   Navigator.of(context)
                       .push(new MaterialPageRoute(builder: (b) {
                     return wzrytyf_gg();
                   }));
-                  */
 
-                  dialog_tip(context, "暂未开放!");
-
+                  // dialog_tip(context, "暂未开放!");
                 },
               ),
               new Divider(),
@@ -176,4 +174,39 @@ class _wzrytyfState extends State<wzrytyf> {
       throw 'Could not launch $url';
     }
   }
+
+  getNewsData() async {
+    Map map = await get_wzrytyfgg_data();
+    listview_data.clear();
+
+    map.forEach((k, v) {
+      setState(() {
+        listview_data.add(
+
+            Padding(padding: EdgeInsets.all(10),
+              child: InkWell(
+              child: Card(
+                child: Padding(padding: EdgeInsets.all(10),
+                child: Text(k,style: TextStyle(
+                  fontSize: 18
+                ),),),
+              ),
+              onTap: () async {
+                String link = "http://pvp.qq.com$v";
+
+                if (await canLaunch(link)) {
+                  await launch(link);
+                } else {
+                  throw 'Could not launch $link';
+                }
+              },
+            ),)
+
+
+        );
+      });
+    });
+  }
 }
+
+List<Widget> listview_data = new List();
